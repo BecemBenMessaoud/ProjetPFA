@@ -15,6 +15,8 @@ class CreateDemandsTable extends Migration
     {
         Schema::create('demands', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->integer('article_id');
             $table->longText('motive');
             $table->string('status');
             $table->timestamps();

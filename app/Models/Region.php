@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Region
@@ -15,4 +16,15 @@ use Illuminate\Database\Eloquent\Model;
 class Region extends Model
 {
     use HasFactory;
+
+    public function admins(): HasMany
+    {
+        return $this->hasMany(Admin::class);
+    }
+
+    public function users(): HasMany
+{
+    return $this->hasMany(User::class);
+}
+
 }

@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class User
  * @package App\Models
  *
+ * @property string region_id
  * @property string first_name
  * @property string last_name
  * @property string address
@@ -19,4 +22,20 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use HasFactory;
+
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class);
+    }
+
+    public function givenArticles(): HasMany
+    {
+        return $this->hasMany(Article::class);
+    }
+
+    public function demands(): HasMany
+    {
+        return $this->hasMany(Demand::class);
+    }
+
 }
