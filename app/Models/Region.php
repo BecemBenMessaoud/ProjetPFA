@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Models
  *
  * @property string name
- * @property int code_postal
+ * @property int postal_code
  */
 class Region extends Model
 {

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Models
  *
  * @property string motive
- * @property string status 
+ * @property string status
  */
 class Demand extends Model
 {
