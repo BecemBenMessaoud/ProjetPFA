@@ -24,10 +24,20 @@ class Article extends Model
 {
     use HasFactory;
 
+    const STATUS_NOT_AVAILABLE = 'not_available';
+    const STATUS_AVAILABLE = 'available';
+    const STATUS_GIVEN = 'given';
+    const STATUSES = [
+        self::STATUS_NOT_AVAILABLE,
+        self::STATUS_AVAILABLE,
+        self::STATUS_GIVEN,
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

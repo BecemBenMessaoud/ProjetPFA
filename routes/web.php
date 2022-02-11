@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'user'], function () {
+
+    Route::group(['prefix' => 'article'], function () {
+        Route::post('/', [ArticleController::class, 'create']);
+        Route::delete('/{article_id}', [ArticleController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'demand'], function () {
+        // demand routes
+    });
+
+
 });

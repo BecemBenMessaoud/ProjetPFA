@@ -19,6 +19,10 @@ class Demand extends Model
 {
     use HasFactory;
 
+    const STATUS_PENDING = 'pending';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_REFUSED = 'refused';
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
