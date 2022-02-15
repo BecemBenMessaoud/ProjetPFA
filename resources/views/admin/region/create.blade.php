@@ -1,5 +1,13 @@
 @extends('layout')
 
+@section('title')
+    @if(isset($region))
+        Edit region
+    @else
+        Create region
+    @endif
+@endsection
+
 @section('content')
 
     @if ($errors->any())

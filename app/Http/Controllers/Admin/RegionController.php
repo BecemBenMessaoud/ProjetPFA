@@ -14,6 +14,7 @@ class RegionController extends Controller
         $regions = Region::query()->withCount('admins')
             ->withCount('users')
             ->get();
+
         return view('admin.region.index', compact('regions'));
     }
 
