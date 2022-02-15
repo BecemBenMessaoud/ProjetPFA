@@ -62,11 +62,6 @@
                 <i class="fas fa-fw fa-ticket-alt"></i>
                 <span>Categories</span></a>
         </li>
-        <li class="nav-item ">
-            <a class="nav-link" href="/categories">
-                <i class="fas fa-fw fa-ticket-alt"></i>
-                <span>Categories</span></a>
-        </li>
         <li class="nav-item regions">
             <a class="nav-link" href="/admin/regions">
                 <i class="fas fa-fw fa-map"></i>
