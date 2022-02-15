@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['prefix' => 'admin'], function () {
+    Route::group(['prefix' => 'regions'], function () {
+        Route::get('/', ['App\Http\Controllers\Admin\RegionController', 'index']);
+        Route::get('/create', ['App\Http\Controllers\Admin\RegionController', 'create']);
+        Route::post('/store', ['App\Http\Controllers\Admin\RegionController', 'store']);
+        Route::get('/edit/{region_id}', ['App\Http\Controllers\Admin\RegionController', 'edit']);
+        Route::post('/update/{region_id}', ['App\Http\Controllers\Admin\RegionController', 'update']);
+        Route::delete('/delete/{region_id}', ['App\Http\Controllers\Admin\RegionController', 'delete']);
+    });
+});
+
 
 Route::group(['prefix' => 'user'], function () {
 

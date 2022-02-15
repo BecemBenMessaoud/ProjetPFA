@@ -17,6 +17,8 @@ class Region extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function admins(): HasMany
     {
         return $this->hasMany(Admin::class);
