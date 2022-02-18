@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\User\ArticleController;
 use Illuminate\Support\Facades\Route;
@@ -24,5 +25,15 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{region_id}', 'edit');
         Route::post('/update/{region_id}', 'update');
         Route::delete('/delete/{region_id}', 'delete');
+    });
+
+    Route::prefix('categories')->controller(CategoryController::class)->group(function (){
+        Route::get('/','index');
+        Route::get('/create','create');
+        Route::delete('/delete/{category_id}','delete');
+        Route::get('/edit/{category_id}','edit');
+        Route::post('/store','store');
+        Route::post('/update/{category_id}','update');
+
     });
 });
