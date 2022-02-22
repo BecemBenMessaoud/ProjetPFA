@@ -10,22 +10,6 @@
 
 @section('content')
 
-    @if ($errors->any())
-        <div>
-            <div class="card bg-danger text-white shadow">
-                <div class="card-body">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-
-                </div>
-            </div>
-        </div>
-
-    @endif
-
     <form @if(isset($region)) action="/admin/regions/update/{{$region->id}}" @else action="/admin/regions/store"
           @endif method="POST">
         @csrf
@@ -40,6 +24,22 @@
             <input name="postal_code" type="text" class="form-control" placeholder="Postal Code"
                    @if(isset($region)) value="{{$region->postal_code}}" @endif>
         </div>
+
+        @if ($errors->any())
+            <div style="margin-bottom: 20px">
+                <div class="card bg-danger text-white shadow">
+                    <div class="card-body">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+        @endif
 
         <button type="submit" class="btn btn-primary">@if(isset($region)) Update @else Save @endif</button>
     </form>

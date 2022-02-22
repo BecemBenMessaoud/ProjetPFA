@@ -27,11 +27,11 @@ class CreateAdminsTable extends Migration
         });
 
         $admin = new Admin();
-        $admin->first_name = 'Super';
-        $admin->last_name = 'Admin';
-        $admin->email = 'superadmin@test.com';
-        $admin->password = Hash::make('test1234');
-        $admin->is_superadmin = 1;
+        $admin->first_name = Admin::DEFAULT_ADMIN['first_name'];
+        $admin->last_name = Admin::DEFAULT_ADMIN['last_name'];
+        $admin->email = Admin::DEFAULT_ADMIN['email'];
+        $admin->password = Hash::make(Admin::DEFAULT_ADMIN['password']);
+        $admin->is_superadmin = Admin::DEFAULT_ADMIN['is_superadmin'];
         $admin->save();
 
     }

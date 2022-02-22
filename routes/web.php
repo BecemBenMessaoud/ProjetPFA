@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\User\ArticleController;
@@ -36,4 +37,15 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{category_id}','update');
 
     });
+
+    Route::prefix('admins')->controller(AdminController::class)->group(function (){
+        Route::get('/','index');
+        Route::get('/create','create');
+        Route::delete('/delete/{admin_id}','delete');
+        Route::get('/edit/{admin_id}','edit');
+        Route::post('/store','store');
+        Route::post('/update/{admin_id}','update');
+
+    });
+
 });

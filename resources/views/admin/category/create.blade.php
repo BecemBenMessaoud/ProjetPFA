@@ -10,22 +10,6 @@
 
 @section('content')
 
-    @if ($errors->any())
-        <div>
-            <div class="card bg-danger text-white shadow">
-                <div class="card-body">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-
-                </div>
-            </div>
-        </div>
-
-    @endif
-
     <form @if(isset($category)) action="/admin/categories/update/{{$category->id}}" @else action="/admin/categories/store"
           @endif method="POST">
         @csrf
@@ -43,6 +27,20 @@
             @endforeach
         </select>
 
+        @if ($errors->any())
+            <div style="margin-top: 20px">
+                <div class="card bg-danger text-white shadow">
+                    <div class="card-body">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        @endif
 
         <button style="margin-top: 20px" type="submit" class="btn btn-primary">@if(isset($category)) Update @else Save @endif</button>
     </form>

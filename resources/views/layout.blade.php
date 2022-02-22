@@ -47,8 +47,8 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
-        <li class="nav-item ">
-            <a class="nav-link" href="/admins">
+        <li class="nav-item admins ">
+            <a class="nav-link" href="/admin/admins">
                 <i class="fas fa-fw fa-users"></i>
                 <span>Admins</span></a>
         </li>
