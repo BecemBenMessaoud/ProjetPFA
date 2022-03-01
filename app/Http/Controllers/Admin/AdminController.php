@@ -32,7 +32,6 @@ class AdminController extends Controller
             'email' => 'required|string|unique:admins,email',
             'is_superadmin' => 'required|int|in:0,1',
             'region_id' => 'required_if:is_superadmin,0|int',
-
         ]);
 
         $firstName = $request->input('first_name');

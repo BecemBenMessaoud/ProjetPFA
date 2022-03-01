@@ -34,7 +34,7 @@
         </div>
 
         <label for="is_superadmin">Role</label>
-        <select class="form-control role" name="is_superadmin">
+        <select style="margin-bottom: 10px" class="form-control role" name="is_superadmin">
             <option>Choose role</option>
             <option @if(isset($admin)) @if(!$admin->isSuperAdmin()) selected @endif @endif value="0">Administrator
             </option>
@@ -75,6 +75,28 @@
 
 @section('script')
     <script type="text/javascript">
-        $('li.admins').addClass('active')
+        $(document).ready(function () {
+            $('li.admins').addClass('active')
+
+            let selectRole = $('select[name="is_superadmin"]');
+
+            selectRole.on('change', function () {
+                let selectRegion = $('select.region_id');
+                let selectRegionLabel = $('label.region_id');
+
+                let isSuperadmin = $(this).val();
+                if (isSuperadmin === '1') {
+                    selectRegion.removeAttr('name').hide()
+                    selectRegionLabel.hide()
+                } else {
+                    selectRegion.attr('name', 'region_id').show()
+                    selectRegionLabel.show()
+                }
+            })
+
+            selectRole.trigger('change')
+        })
+
     </script>
+
 @endsection
