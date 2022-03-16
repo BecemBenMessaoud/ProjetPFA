@@ -85,4 +85,11 @@ class RegisterController extends Controller
 
         return $user;
     }
+
+    public function showRegistrationForm()
+    {
+        $regions = Region::all();
+
+        return view('auth.register', compact('regions'));
+    }
 }
