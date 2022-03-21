@@ -47,4 +47,8 @@ class Article extends Model
     {
         return $this->hasMany(Demand::class);
     }
+    public function pictures ():HasMany
+    {
+        return $this ->hasMany( Picture::class);
+    }
 }
