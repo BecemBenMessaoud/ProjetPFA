@@ -24,14 +24,14 @@ class ArticleController extends Controller
         $request->validate([
             'category_id' => ['required', 'int'],
             'name' => ['required', 'string', 'max:20'],
-            'description' => ['required', 'text', 'max:50'],
+            'description' => ['required', 'string', 'max:50'],
             'state' => ['required', 'string', 'max:20'],
         ]);
 
         $categoryId = $request->input('category_id');
         $exist = Category::query()->find($categoryId);
         if (!$exist) {
-            return redirect('/user/articles/create');
+            return redirect('/user/articles/');
         }
         $name = $request->input('name');
         $description = $request->input('description');
@@ -107,7 +107,7 @@ class ArticleController extends Controller
     public function addPicture(Request $request)
     {
      $request->validate([
-         'i'
+         ''
 
      ]) ;
 

@@ -48,4 +48,8 @@ class Category extends Model
 
 
     }
+
+    public function getLabel(){
+        return $this->type  . ' (' . self::getLevelLabel($this->level) . ')';
+    }
 }

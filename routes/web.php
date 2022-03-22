@@ -51,6 +51,22 @@ Route::prefix('admin')->group(function () {
 
 });
 
+Route::prefix('user')->group(function(){
+    Route::prefix('articles')->controller(ArticleController::class)->group(function (){
+        Route::get('/','index');
+        Route::delete('/delete/{article_id}','delete');
+        Route::get('/edit/{article_id}','edit');
+        Route::post('/store','store');
+        Route::post('/update/{article_id}','update');
+        Route::post('/picture/{article_id}','addPicture');
+        Route::delete('/picture/{picture_id}','deletePicture');
+
+
+    });
+
+
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

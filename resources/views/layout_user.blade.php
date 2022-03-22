@@ -43,7 +43,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item ">
-            <a class="nav-link" href="/user/articles/create">
+            <a class="nav-link" href="/user/articles">
                 <i class="fas fa-fw fa-plus"></i>
                 <span>Create Article</span></a>
         </li>
