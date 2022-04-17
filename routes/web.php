@@ -60,6 +60,7 @@ Route::prefix('user')->group(function(){
         Route::post('/update/{article_id}','update');
         Route::post('/picture/{article_id}','addPicture');
         Route::delete('/picture/{picture_id}','deletePicture');
+        Route::get('/{article_id}/pictures','pictures');
 
 
     });

@@ -5,10 +5,13 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Picture;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class ArticleController extends Controller
@@ -47,6 +50,7 @@ class ArticleController extends Controller
         $article->state = $state;
         $article->save();
 
+        return redirect('/user/articles/' . $article->id . '/pictures');
     }
 
     public function edit($articleId)
@@ -67,6 +71,8 @@ class ArticleController extends Controller
         $this->canEdit($article);
 
         $article->delete();
+
+        // TODO delete article pictures
     }
 
     public function update($articleId, Request $request)
@@ -99,17 +105,49 @@ class ArticleController extends Controller
         $article->save();
     }
 
-    public function deletePicture()
+    public function pictures($articleId)
     {
+        $article = Article::query()->findOrFail($articleId);
+        $this->canEdit($article);
 
+        $article = Article::query()->findOrFail($articleId);
+        $pictures = $article->pictures()->select(['id', 'name'])->get();
+
+        return view('user.article.pictures', compact('article', 'pictures'));
     }
 
-    public function addPicture(Request $request)
+    public function addPicture(Request $request, $articleId)
     {
-     $request->validate([
-         ''
+        $article = Article::query()->findOrFail($articleId);
+        $this->canEdit($article);
 
-     ]) ;
+        $request->validate([
+            'picture' => 'required|image|mimes:jpg,png,jpeg',
+        ]);
+
+        $picture = $request->file('picture');
+        $ext = $picture->extension();
+        $name = uniqid('pic_') . '.' . $ext;
+        $picture->move(public_path('pictures'), $name);
+
+        $picture = new Picture();
+        $picture->article_id = $articleId;
+        $picture->name = $name;
+        $picture->save();
+
+        return redirect('/user/articles/' . $article->id . '/pictures');
+    }
+
+    public function deletePicture($pictureId)
+    {
+        $picture = Picture::query()->findOrFail($pictureId);
+        $article = $picture->article;
+        $this->canEdit($article);
+
+        $picture->delete();
+        File::delete(public_path("pictures/" . $picture->name));
+
+        return redirect('/user/articles/' . $article->id . '/pictures');
 
 
     }

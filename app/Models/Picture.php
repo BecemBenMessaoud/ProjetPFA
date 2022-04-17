@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * Class Picture
  * @package App\Models
  *
- * @property string path
- * @property int articleId
+ * @property string name
+ * @property int article_id
  */
 class Picture extends Model
 {
