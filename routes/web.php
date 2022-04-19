@@ -61,7 +61,7 @@ Route::prefix('user')->group(function(){
         Route::post('/picture/{article_id}','addPicture');
         Route::delete('/picture/{picture_id}','deletePicture');
         Route::get('/{article_id}/pictures','pictures');
-
+        Route::get('/given', 'given');
 
     });
 

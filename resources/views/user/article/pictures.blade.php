@@ -53,7 +53,7 @@
         @endforeach
     </div>
 
-    <button onclick="window.location='/givenArticles'" style="margin-bottom: 20px" class="btn btn-success">Done</button>
+    <button onclick="window.location='/user/articles/given'" style="margin-bottom: 20px" class="btn btn-success">Done</button>
 
     @if ($errors->any())
         <div style="margin-bottom: 20px">

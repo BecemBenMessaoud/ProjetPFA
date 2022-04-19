@@ -57,7 +57,7 @@ class ArticleController extends Controller
     {
         $article = Article::query()->findOrFail($articleId);
 
-        $this->canEdit($article);
+        $article->canEdit();
 
         $categories = Category::all();
 
@@ -68,23 +68,27 @@ class ArticleController extends Controller
     {
         $article = Article::query()->findOrFail($articleId);
 
-        $this->canEdit($article);
+        $article->canEdit();
+
+        foreach ($article->pictures as $picture) {
+            $this->deletePicture($picture->id);
+        }
 
         $article->delete();
 
-        // TODO delete article pictures
+        return redirect('/user/articles/given');
     }
 
     public function update($articleId, Request $request)
     {
         $article = Article::query()->findOrFail($articleId);
 
-        $this->canEdit($article);
+        $article->canEdit();
 
         $request->validate([
             'category_id' => ['required', 'int'],
             'name' => ['required', 'string', 'max:20'],
-            'description' => ['required', 'text', 'max:50'],
+            'description' => ['required', 'string', 'max:50'],
             'state' => ['required', 'string', 'max:20'],
         ]);
 
@@ -93,6 +97,7 @@ class ArticleController extends Controller
         if (!$exist) {
             return redirect('/user/articles/create');
         }
+
 
         $name = $request->input('name');
         $description = $request->input('description');
@@ -103,12 +108,14 @@ class ArticleController extends Controller
         $article->description = $description;
         $article->state = $state;
         $article->save();
+
+        return redirect('/user/articles/' . $article->id . '/pictures');
     }
 
     public function pictures($articleId)
     {
         $article = Article::query()->findOrFail($articleId);
-        $this->canEdit($article);
+        $article->canEdit();
 
         $article = Article::query()->findOrFail($articleId);
         $pictures = $article->pictures()->select(['id', 'name'])->get();
@@ -119,7 +126,7 @@ class ArticleController extends Controller
     public function addPicture(Request $request, $articleId)
     {
         $article = Article::query()->findOrFail($articleId);
-        $this->canEdit($article);
+        $article->canEdit();
 
         $request->validate([
             'picture' => 'required|image|mimes:jpg,png,jpeg',
@@ -142,22 +149,19 @@ class ArticleController extends Controller
     {
         $picture = Picture::query()->findOrFail($pictureId);
         $article = $picture->article;
-        $this->canEdit($article);
+        $article->canEdit();
 
         $picture->delete();
         File::delete(public_path("pictures/" . $picture->name));
 
         return redirect('/user/articles/' . $article->id . '/pictures');
-
-
     }
 
-    private function canEdit($article)
+    public function given()
     {
-        if ($article->user_id !== Auth::user()->id || $article->status !== Article::STATUS_NOT_AVAILABLE) {
-            abort(403);
-        }
+        $user = Auth::user();
+        $articles = Article::query()->where('user_id', '=', $user->id)->get();
+
+        return view('user.article.given', compact('articles'));
     }
-
-
 }

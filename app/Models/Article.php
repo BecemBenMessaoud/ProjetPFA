@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 
 /**
@@ -47,8 +48,16 @@ class Article extends Model
     {
         return $this->hasMany(Demand::class);
     }
+
     public function pictures ():HasMany
     {
         return $this ->hasMany( Picture::class);
+    }
+
+    public function canEdit(){
+        if ($this->user_id !== Auth::user()->id || $this->status !== Article::STATUS_NOT_AVAILABLE) {
+            abort(403);
+        }
+
     }
 }
