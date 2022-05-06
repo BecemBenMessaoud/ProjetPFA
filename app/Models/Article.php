@@ -55,9 +55,10 @@ class Article extends Model
     }
 
     public function canEdit(){
-        if ($this->user_id !== Auth::user()->id || $this->status !== Article::STATUS_NOT_AVAILABLE) {
+        if ($this->user_id != Auth::user()->id || $this->status !== Article::STATUS_NOT_AVAILABLE) {
             abort(403);
         }
 
+        return true;
     }
 }

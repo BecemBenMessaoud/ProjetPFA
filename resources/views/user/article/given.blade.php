@@ -26,7 +26,7 @@
                                     <form method="POST" action="/user/articles/delete/{{$article->id}}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="window.location='/user/articles/jjj/{{$article->id}}'" class="btn"><i class="fas fa-trash"></i></button>
+                                        <button type="submit" class="btn"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </div>
                             @endif
