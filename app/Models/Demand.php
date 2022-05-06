@@ -23,6 +23,10 @@ class Demand extends Model
     const STATUS_ACCEPTED = 'accepted';
     const STATUS_REFUSED = 'refused';
 
+    public function getStatus(){
+
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
