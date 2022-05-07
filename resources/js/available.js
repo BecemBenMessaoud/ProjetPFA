@@ -8,7 +8,7 @@ $(document).ready(function () {
     });
 
     $('.btn-demand').on('click', function () {
-       clearAndShowModal();
+        clearAndShowModal();
         articleId = $(this).parents().eq(4).data('article-id');
     })
 

@@ -64,6 +64,7 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
         Route::get('/{article_id}/pictures', 'pictures');
         Route::get('/given', 'given');
         Route::get('/available', 'available');
+        Route::get('/requested', 'requested');
 
     });
 
@@ -72,11 +73,11 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
 Route::prefix('user')->group(function () {
     Route::prefix('demands')->controller(DemandController::class)->group(function () {
         Route::get('/', 'index');
-        Route::get('/create', 'create');
-        Route::post('/store/{article_id}', 'store'); // OK
-        Route::get('/edit/{demand_id}', 'edit');
+        Route::post('/store/{article_id}', 'store');
         Route::post('/update/{demand_id}', 'update');
-        Route::delete('/delete/{demand_id}', 'delete'); //ok
+        Route::delete('/delete/{demand_id}', 'delete');
+        Route::get('/{demand_id}', 'getDemand');
+
     });
 });
 

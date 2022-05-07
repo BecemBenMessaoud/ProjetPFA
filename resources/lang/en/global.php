@@ -8,4 +8,11 @@ return [
     ],
 
 
+    'demand_status' => [
+        'pending' => 'Pending',
+        'accepted' => 'Accepted',
+        'refused' => 'Refused',
+    ]
+
+
 ];

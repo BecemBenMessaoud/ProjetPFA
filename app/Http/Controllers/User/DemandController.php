@@ -5,16 +5,18 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Demand;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DemandController extends Controller
 {
-    //TODO check
-    public function index()
+    public function getDemand($demandId)
     {
-        $articles = Article::all();
-        return view('user.demand.create', compact('articles'));
+        $demand = Demand::query()->findOrFail($demandId);
+
+        return response()->json($demand, 200);
+
     }
 
     public function store(Request $request, $articleId)
@@ -52,21 +54,40 @@ class DemandController extends Controller
         return response()->json(['success' => true, 'message' => 'demand created'], 201);
     }
 
-    //TODO check
+    public function update(Request $request, $demandId)
+    {
+        $request->validate([
+            'motive' => ['required', 'string', 'max:400'],
+        ]);
+
+        $demand = Demand::query()->findOrFail($demandId);
+        $userId = Auth::user()->id;
+
+        if ($demand->status !== Demand::STATUS_PENDING || $userId !== $demand->user_id) {
+            return response()->json(['success' => false, 'message' => 'article not available'], 403);
+        }
+
+        $motive = $request->input('motive');
+
+        $demand->motive = $motive;
+        $demand->save();
+
+        $demand->motive = $demand->getMotive();
+
+        return response()->json(['success' => true, 'demand' => $demand, 'message' => 'demand update'], 203);
+    }
+
     public function delete($demandId)
     {
         $demand = Demand::query()->findOrFail($demandId);
-
-        if ($demand->status !== Demand::STATUS_PENDING) {
-            abort(403);
-        }
-
         $userId = Auth::user()->id;
 
-        if ($userId !== $demand->user_id) {
+        if ($demand->status !== Demand::STATUS_PENDING || $userId !== $demand->user_id) {
             abort(403);
         }
 
         $demand->delete();
+
+        return response()->json(['success' => true, 'message' => 'demand deleted'], 204);
     }
 }

@@ -23,7 +23,8 @@ class Demand extends Model
     const STATUS_ACCEPTED = 'accepted';
     const STATUS_REFUSED = 'refused';
 
-    public function getStatus(){
+    public function getStatus()
+    {
 
     }
 
@@ -31,8 +32,15 @@ class Demand extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function article(): BelongsTo{
+
+    public function article(): BelongsTo
+    {
         return $this->belongsTo((Article::class));
+    }
+
+    public function getMotive()
+    {
+        return strlen($this->motive) > 150 ? substr($this->motive, 0, 150) . ' ...' : $this->motive;
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Demand;
 use App\Models\Picture;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -177,5 +178,13 @@ class ArticleController extends Controller
             ->get();
 
         return view('user.article.available', compact('articles'));
+    }
+
+    public function requested()
+    {
+        $user = Auth::user();
+        $demands = Demand::query()->where('user_id', '=', $user->id)->get();
+
+        return view('user.article.requested', compact('demands'));
     }
 }

@@ -16,3 +16,4 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
 mix.scripts('resources/js/available.js', 'public/js/available.js').version();
+mix.scripts('resources/js/requested.js', 'public/js/requested.js').version();
