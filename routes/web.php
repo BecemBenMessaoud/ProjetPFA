@@ -52,7 +52,7 @@ Route::prefix('admin')->group(function () {
 
 });
 
-Route::prefix('user')->group(function () {
+Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::prefix('articles')->controller(ArticleController::class)->group(function () {
         Route::get('/', 'index');
         Route::delete('/delete/{article_id}', 'delete');
@@ -63,6 +63,7 @@ Route::prefix('user')->group(function () {
         Route::delete('/picture/{picture_id}', 'deletePicture');
         Route::get('/{article_id}/pictures', 'pictures');
         Route::get('/given', 'given');
+        Route::get('/available', 'available');
 
     });
 

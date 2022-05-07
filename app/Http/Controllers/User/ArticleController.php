@@ -164,4 +164,18 @@ class ArticleController extends Controller
 
         return view('user.article.given', compact('articles'));
     }
+
+    public function available()
+    {
+        $user = Auth::user();
+        $articles = Article::query()
+            ->where('status', '=', Article::STATUS_AVAILABLE)
+            ->where('user_id', '!=', $user->id)
+            ->whereDoesntHave('demands', function ($demandQuery) use ($user) {
+                $demandQuery->where('user_id', '=', $user->id);
+            })
+            ->get();
+
+        return view('user.article.available', compact('articles'));
+    }
 }

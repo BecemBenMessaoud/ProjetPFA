@@ -5,12 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Demand;
-use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class DemandController extends Controller
 {
+    //TODO check
     public function index()
     {
         $articles = Article::all();
@@ -20,25 +20,39 @@ class DemandController extends Controller
     public function store(Request $request, $articleId)
     {
         $request->validate([
-            'motive' => ['required', 'string', 'max:50'],
+            'motive' => ['required', 'string', 'max:400'],
         ]);
 
-        Article::query()->findOrFail($articleId);
+        $article = Article::query()->findOrFail($articleId);
+
+        if ($article->status !== Article::STATUS_AVAILABLE) {
+            return response()->json(['success' => false, 'message' => 'article not available'], 403);
+        }
+
+        $user = Auth::user();
+
+        $demand = Demand::query()->where('user_id', '=', $user->id)
+            ->where('article_id', '=', $articleId)
+            ->first();
+
+        if ($demand) {
+            return response()->json(['success' => false, 'message' => 'already made demand on this article'], 403);
+        }
 
 
         $motive = $request->input('motive');
-        $userId = Auth::user()->id;
 
         $demand = new Demand();
-        $demand->user_id = $userId;
+        $demand->user_id = $user->id;
         $demand->article_id = $articleId;
         $demand->motive = $motive;
         $demand->status = Demand::STATUS_PENDING;
         $demand->save();
 
-        // Redirect to requested articles.
+        return response()->json(['success' => true, 'message' => 'demand created'], 201);
     }
 
+    //TODO check
     public function delete($demandId)
     {
         $demand = Demand::query()->findOrFail($demandId);

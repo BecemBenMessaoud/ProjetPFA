@@ -19,8 +19,7 @@
                     <div class="card-header py-3">
                         <div class="row d-flex justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">{{$article->name}}</h6>
-                            {{-- TODO there's a problem with this condition, fix it --}}
-                            @if($article->canEdit())
+                            @if($article->canEdit(true))
                                 <div class="row">
                                     <button  onclick="window.location='/user/articles/edit/{{$article->id}}'" class="btn"><i class="fas fa-edit"></i></button>
                                     <form method="POST" action="/user/articles/delete/{{$article->id}}">

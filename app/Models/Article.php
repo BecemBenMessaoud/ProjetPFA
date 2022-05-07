@@ -49,16 +49,20 @@ class Article extends Model
         return $this->hasMany(Demand::class);
     }
 
-    public function pictures ():HasMany
+    public function pictures(): HasMany
     {
-        return $this ->hasMany( Picture::class);
+        return $this->hasMany(Picture::class);
     }
 
-    public function canEdit(){
-        if ($this->user_id != Auth::user()->id || $this->status !== Article::STATUS_NOT_AVAILABLE) {
+    public function canEdit($view = false)
+    {
+        if ($view) {
+            return $this->user_id === Auth::user()->id && $this->status === Article::STATUS_NOT_AVAILABLE;
+        }
+
+        if ($this->user_id !== Auth::user()->id || $this->status !== Article::STATUS_NOT_AVAILABLE) {
             abort(403);
         }
 
-        return true;
     }
 }
