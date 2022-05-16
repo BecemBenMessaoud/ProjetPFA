@@ -17,3 +17,4 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.scripts('resources/js/available.js', 'public/js/available.js').version();
 mix.scripts('resources/js/requested.js', 'public/js/requested.js').version();
+mix.scripts('resources/js/requested_admin.js', 'public/js/requested_admin.js').version();

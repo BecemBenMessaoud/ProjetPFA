@@ -67,8 +67,8 @@
                 <i class="fas fa-fw fa-map"></i>
                 <span>Regions</span></a>
         </li>
-        <li class="nav-item ">
-            <a class="nav-link" href="/demands">
+        <li class="nav-item demands">
+            <a class="nav-link" href="/admin/demands">
                 <i class="fas fa-fw fa-hand-paper"></i>
                 <span>Demands</span></a>
         </li>

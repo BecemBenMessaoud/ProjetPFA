@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DemandController as AdminDemandController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\User\ArticleController;
-use App\Http\Controllers\User\DemandController;
+use App\Http\Controllers\User\DemandController as UserDemandController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,13 @@ Route::prefix('admin')->group(function () {
 
     });
 
+    Route::prefix('demands')->controller(AdminDemandController::class)->group(function () {
+       Route::get('/','index');
+       Route::get('/accept/{demand_id}','accept');
+       Route::get('/refuse/{demand_id}','refuse');
+
+
+    });
 });
 
 Route::middleware(['auth'])->prefix('user')->group(function () {
@@ -71,7 +79,7 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
 
 });
 Route::prefix('user')->group(function () {
-    Route::prefix('demands')->controller(DemandController::class)->group(function () {
+    Route::prefix('demands')->controller(UserDemandController::class)->group(function () {
         Route::get('/', 'index');
         Route::post('/store/{article_id}', 'store');
         Route::post('/update/{demand_id}', 'update');

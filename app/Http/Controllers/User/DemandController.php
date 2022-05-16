@@ -74,7 +74,7 @@ class DemandController extends Controller
 
         $demand->motive = $demand->getMotive();
 
-        return response()->json(['success' => true, 'demand' => $demand, 'message' => 'demand update'], 203);
+        return response()->json(['success' => true, 'demand' => $demand, 'message' => 'demand updated'], 203);
     }
 
     public function delete($demandId)
