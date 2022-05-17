@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DemandController as AdminDemandController;
 use App\Http\Controllers\Admin\RegionController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\User\DemandController as UserDemandController;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +50,10 @@ Route::prefix('admin')->group(function () {
         Route::post('/store', 'store');
         Route::post('/update/{admin_id}', 'update');
 
+    });
+    Route::prefix('users')->controller(UserController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::delete('/delete/{user_id}', 'delete');
     });
 
     Route::prefix('demands')->controller(AdminDemandController::class)->group(function () {

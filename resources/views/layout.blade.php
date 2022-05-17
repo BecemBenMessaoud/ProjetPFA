@@ -52,8 +52,8 @@
                 <i class="fas fa-fw fa-users"></i>
                 <span>Admins</span></a>
         </li>
-        <li class="nav-item ">
-            <a class="nav-link" href="/clients">
+        <li class="nav-item users ">
+            <a class="nav-link" href="/admin/users">
                 <i class="fas fa-fw fa-users"></i>
                 <span>Clients</span></a>
         </li>
@@ -73,7 +73,7 @@
                 <span>Demands</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/articles">
+            <a class="nav-link" href="/admin/dons">
                 <i class="fas fa-fw fa-box"></i>
                 <span>Dons</span></a>
         </li>
