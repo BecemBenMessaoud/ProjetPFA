@@ -3,5 +3,6 @@
     "/css/app.css": "/css/app.css?id=1ba4616002e30d600ff3f664161ff848",
     "/js/available.js": "/js/available.js?id=59cba4148267c3189b9c8a5bd974310e",
     "/js/requested.js": "/js/requested.js?id=6306fb5236a1b42d67f09062e7ce0efd",
-    "/js/requested_admin.js": "/js/requested_admin.js?id=bbb70554f9891a4a146ceee85e81fc83"
+    "/js/requested_admin.js": "/js/requested_admin.js?id=bbb70554f9891a4a146ceee85e81fc83",
+    "/js/article_admin.js": "/js/article_admin.js?id=f81362a8eb3493f0de5c3e54eced0c0c"
 }

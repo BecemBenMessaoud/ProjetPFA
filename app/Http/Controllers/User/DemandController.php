@@ -88,6 +88,6 @@ class DemandController extends Controller
 
         $demand->delete();
 
-        return response()->json(['success' => true, 'message' => 'demand deleted'], 204);
+        return response()->json(['success' => true, 'message' => 'demand deleted']);
     }
 }

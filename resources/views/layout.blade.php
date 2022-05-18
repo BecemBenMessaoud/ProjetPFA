@@ -42,11 +42,7 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item ">
-            <a class="nav-link" href="/dashboard">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
-        </li>
+
         <li class="nav-item admins ">
             <a class="nav-link" href="/admin/admins">
                 <i class="fas fa-fw fa-users"></i>
@@ -72,8 +68,8 @@
                 <i class="fas fa-fw fa-hand-paper"></i>
                 <span>Demands</span></a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/admin/dons">
+        <li class="nav-item articles">
+            <a class="nav-link" href="/admin/articles">
                 <i class="fas fa-fw fa-box"></i>
                 <span>Dons</span></a>
         </li>

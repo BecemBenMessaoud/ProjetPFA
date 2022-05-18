@@ -63,6 +63,14 @@ Route::prefix('admin')->group(function () {
 
 
     });
+
+    Route::prefix('articles')->controller(\App\Http\Controllers\Admin\ArticleController::class)->group(function () {
+        Route::get('/','index');
+        Route::get('/accept/{demand_id}','accept');
+        Route::get('/refuse/{demand_id}','refuse');
+
+
+    });
 });
 
 Route::middleware(['auth'])->prefix('user')->group(function () {
